@@ -1,0 +1,70 @@
+{%extends 'layout.twig'%}
+{%block title%}{{user.getFirstName}} {{user.getLastName}}{%endblock%}
+{%block login%}<li class="login"><a href="/logout">Déconnexion</a></li>{%endblock%}
+{%block body%}
+<section id="user-block-body">
+  <div>
+    <div id="cover-block"  style="background:url('/img/home3.jpg') no-repeat scroll 0 0 / 100% auto rgba(0, 0, 0, 0)">
+      <div id="b-user-info">
+        <figure id="b-profil">
+          {%if user.getPicture!=null%}
+            <img src="/public/uploads/images/{{user.getPicture}}" alt="{{user.getFirstName}} {{user.getLastName}}" />
+          {%else%}
+            <img src="/img/jeune-diplome-homme.png" alt="default image" />
+          {%endif%}
+        </figure>
+        <div id="b-info">
+          <h2>{{user.getFirstName}} {{user.getLastName}}</h2>
+          <h3>Membre depuis Le 31 Mars 2016</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div id="b-options-user">
+      <ul class="plus-options">
+        <li class="first"><a href="/profile"><i class="glyphicon glyphicon-home"></i></a></li>
+        <li class="first"><a href="/account">Compte</a></li>
+        <li class="first"><a href="/albums">Albums</a></li>
+        <li class="first active"><a href="/images">Images</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="b-content">
+    <div class="alert alert-success" role="alert"><p>Image supprimée avec succès</p></div>
+    <div class="alert alert-danger" role="alert"><p>Erreure survenue lors de la suppression de l'image</p></div>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" id="btn-add-album" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Ajoutez des images</button>
+        <form action="/images/add" method="post" id="album-form" enctype="multipart/form-data" class="album-detail">
+          <input type="file" multiple="multiple" accept="image/*" name="uploadedImages"/>
+          <input type="hidden" name="albumId" value="{{album.getId}}">
+          <input type="submit" name="submit-btn" class="s-btn" value="Ajouter">
+        </form>
+      </div>
+    </div>
+    <div id="images-container-row">
+      {%if images | length > 0 %}
+        {%for image in images%}
+          <div class="thumbnail">
+            <img src="{{image.getUrl}}" alt="{{image.getName}}">
+            <div class="caption">
+              <div class="action">
+                <div class="deleteImage action-item" title="Supprimer l'image"><i class="glyphicon glyphicon-trash"></i></div>
+                <input type="hidden" name="name" value="{{image.getId}}">
+                <input type="hidden" name="albumName" value="{{album.getName}}">
+                <input type="hidden" name="bucketName" value="{{bucketName}}">
+                <a class="downloadImage action-item" title="Télécharger l'image" download href="{{image.getUrl}}">
+                  <i class="glyphicon glyphicon-download-alt"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        {%endfor%}
+      {%else%}
+        <h2 class="no-content">Album vide</h2>
+      {%endif%}
+    </div>
+  </div>
+</section>
+{%endblock%}

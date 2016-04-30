@@ -1,0 +1,67 @@
+{%extends 'layout.twig'%}
+{%block title%}{{user.getFirstName}} {{user.getLastName}}{%endblock%}
+{%block login%}<li class="login"><a href="/logout">Déconnexion</a></li>{%endblock%}
+{%block body%}
+<section id="user-block-body">
+  <div>
+    <div id="cover-block"  style="background:url('/img/home3.jpg') no-repeat scroll 0 0 / 100% auto rgba(0, 0, 0, 0)">
+      <div id="b-user-info">
+        <figure id="b-profil">
+          {%if user.getPicture!=null%}
+            <img src="/public/uploads/images/{{user.getPicture}}" alt="{{user.getFirstName}} {{user.getLastName}}" />
+          {%else%}
+            <img src="/img/jeune-diplome-homme.png" alt="default image" />
+          {%endif%}
+        </figure>
+        <div id="b-info">
+          <h2>{{user.getFirstName}} {{user.getLastName}}</h2>
+          <h3>Membre depuis Le 31 Mars 2016</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div id="b-options-user">
+      <ul class="plus-options">
+        <li class="first"><a href="/profile"><i class="glyphicon glyphicon-home"></i></a></li>
+        <li class="first"><a href="/account">Compte</a></li>
+        <li class="first active"><a href="/albums">Albums</a></li>
+        <li class="first"><a href="/images">Images</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="b-content">
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" id="btn-add-album" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Créer un nouveau album</button>
+        <form action="/album/create" method="post" id="album-form">
+          <input type="text" name="name" placeholder="Le nom de l'album" class="form-child">
+          <p class="error-message first">Le nom de l'album est obligatoire.</p>
+          <input type="text" name="location" placeholder="Le lieu concerné par ce album ?">
+          <input type="hidden" name="bucketId" value="{{bucket.getId}}">
+          <input type="submit" name="submit-btn" class="s-btn" value="Créer">
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      {%if albums | length > 0 %}
+        {%for album in albums%}
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <a href="/album/{{album.getId}}">
+                <img src="/img/default_image.png" alt="...">
+                <div class="caption">
+                  <h3>{{album.originalName}} - {{album.getLocation}}</h3>
+                  <h3>{{album.getCreatedDate}}</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+        {%endfor%}
+      {%else%}
+        <h2 class="no-content">Vous avez aucun album encore de créer.</h2>
+      {%endif%}
+    </div>
+  </div>
+</section>
+{%endblock%}
