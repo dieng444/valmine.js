@@ -8,7 +8,7 @@ Valmine.js is an MVC framework for node.js, the framework has several components
 
 ## Install
 
-npm install valmine.js
+__npm__ install valmine.js
 
 ## Documentation
 
