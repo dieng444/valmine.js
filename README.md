@@ -10,6 +10,10 @@ Valmine.js is an MVC framework for node.js, the framework has several components
 
 npm install valmine.js
 
+## Documentation
+
+[Official Documentation Site](http://valminejs.mackydieng.fr/)
+
 ##Quick use
 
 ### The entity
@@ -193,4 +197,4 @@ npm install valmine.js
         userCtrl.renderLoginAction(req,res);
     })
 
-
+Read more on the [Official documentation](http://valminejs.mackydieng.fr/)
