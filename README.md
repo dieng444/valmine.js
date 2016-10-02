@@ -2,7 +2,7 @@
 
 Framewok MVC for node.js
 
-![Valmine js](http://valminejs.mackydieng.fr/img/valminejs-welcome.png)
+![Valmine js](http://valminejs.mackydieng.fr/img/valminejs-welcome2.png)
 
 Valmine.js is an MVC framework for node.js, the framework has several components, including the express framework of node.js uses for its routing system. The tool also uses the module twig for its templating system and the mongobd module for its ODM (Object Document Mapping) integrated. Its uniqueness lies in its simplicity but also in its facility to use.
 
